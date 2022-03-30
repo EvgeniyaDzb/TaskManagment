@@ -1,0 +1,47 @@
+nav {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(13, 170, 170);
+    position: fixed;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+  }
+.navbar__header{
+    font-size: 2rem;
+    color:aliceblue;
+    width: 100%;
+    text-align: center;
+}
+  
+.burger-btn {
+    width: 50px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .burger-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 3px;
+    background-color: aliceblue;
+  }
+  .burger-btn span{
+    position: absolute;
+    top: 13px;
+    width: 30px;
+    height: 3px;
+    background-color: aliceblue;
+  }
+  
+  .burger-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 3px;
+    background-color: aliceblue;
+  }

@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Menu from './components/UI/menu/Menu';
+import Navbar from './components/UI/navbar/Navbar';
+import AppRouter from './router/AppRouter';
+import { routes } from './router/route';
 
-function App() {
+const App: React.FC = () => {
+
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        hello learning react
-      </header>
+      <BrowserRouter>
+       <Navbar header="Task management" menuActive={menuActive} setMenuActive = {setMenuActive}/>     
+       <Menu header="Main menu" items={routes} active={menuActive} setActive = {setMenuActive}/>
+      <main>
+        <AppRouter />
+      </main>
+      </BrowserRouter>
     </div>
   );
 }
