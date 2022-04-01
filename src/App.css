@@ -11,3 +11,8 @@ main {
 p {
   margin: 20px;
 }
+
+.boxContainer{
+  display: flex;
+  flex-wrap: wrap;
+}

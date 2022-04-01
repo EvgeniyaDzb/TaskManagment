@@ -1,3 +1,4 @@
+import { ProjectForm } from "../components/Projects/ProjectForm";
 import Projects from "../components/Projects/Projects";
 import Tasks from "../components/Tasks/Tasks";
 import Workers from "../components/Workers/Workers";
@@ -8,4 +9,5 @@ export const routes = [
     {path: '/projects', element: <Projects/>, value: "Projects"},
     {path: '/tasks', element: <Tasks/>, value: "Tasks"},
     {path: '/workers', element: <Workers/>, value: "Workers"},
+    {path: '/project/:id', element: <ProjectForm/>},
 ]

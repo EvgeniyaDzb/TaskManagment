@@ -8,19 +8,16 @@ type BoxProps = {
     body?:string
   };
 
-
-const Box = (({ children, id, title, body }:BoxProps) => {
+export const Box = (({ children, id, title, body }:BoxProps) => {
     return (
      <div className='box'>
             <div>
-                <strong>{id} {title}</strong>
+                <strong>{title}</strong>
                 <div>
                     {body}
                 </div>
             </div>
             {children}
-        </div>
+     </div>
     );
 });
-
-export default Box;

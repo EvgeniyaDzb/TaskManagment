@@ -9,7 +9,7 @@ type MenuProps = {
 };
 
 
-const Menu = ({ header, items, active, setActive }: MenuProps) => {
+export const Menu = ({ header, items, active, setActive }: MenuProps) => {
     return (
         <div className={active ? 'menu active' : 'menu'} onClick={()=>setActive(false)}>
             <div className="blur" />
@@ -28,5 +28,3 @@ const Menu = ({ header, items, active, setActive }: MenuProps) => {
         </div>
     );
 };
-
-export default Menu;

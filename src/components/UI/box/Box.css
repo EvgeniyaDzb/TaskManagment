@@ -1,8 +1,10 @@
 .box{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     padding: 15px;
     border: 2px solid teal;
-    margin-top: 15px;
+    width: 30%;
+    margin: 10px;
 }
