@@ -10,4 +10,5 @@ export const routes = [
     {path: '/tasks', element: <Tasks/>, value: "Tasks"},
     {path: '/workers', element: <Workers/>, value: "Workers"},
     {path: '/project/:id', element: <ProjectIdPage/>},
+    {path: '/project/new', element: <ProjectIdPage/>},
 ]

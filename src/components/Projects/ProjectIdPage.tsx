@@ -6,10 +6,10 @@ import { Input } from "../UI/input/Input";
 import { projectInitialState, IProject } from "./projectType";
 
 interface IProjectIdPage extends IProject {
-    update?: (newProject:IProject) => void
+    create?: (newProject:IProject) => void
 } 
 
-export const ProjectIdPage = ({update}:IProjectIdPage) => {
+export const ProjectIdPage = ({create}:IProjectIdPage) => {
     const params = useParams();
     const [project, setProject] = useState<IProject>(projectInitialState)
 
@@ -18,10 +18,22 @@ export const ProjectIdPage = ({update}:IProjectIdPage) => {
         console.log("vfvfvjz")
 
     }
+
+    const addNewProject = (e: React.MouseEvent) => {
+        e.preventDefault()
+        const newProject = {
+            ...project, id: Date.now()
+        }
+        Service.postProject(newProject)
+        setProject(projectInitialState)
+    };
+
     useEffect(() => {
-        Service.getProjectById(Number(params.id)).then((response) => {
-            setProject(response);
-        });
+        if(params.id){
+            Service.getProjectById(Number(params.id)).then((response) => {
+                setProject(response);
+            });
+        }
     }, [])
 
 
@@ -39,7 +51,8 @@ export const ProjectIdPage = ({update}:IProjectIdPage) => {
                 type='text'
                 placeholder='Project description'
             />
-            <Button onClick={updateProject}>Update project</Button>
+            {params.id ? <Button onClick={updateProject}>Update project</Button> :
+            <Button onClick={addNewProject}>Add project</Button>}
         </form>
     )
 }
