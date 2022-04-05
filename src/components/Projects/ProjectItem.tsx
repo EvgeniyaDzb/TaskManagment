@@ -2,9 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "../UI/box/Box";
 import { Button } from "../UI/button/Button";
-import { projectType } from "./projectType";
+import { IProject } from "./projectType";
+import "./styles/Project.css"
 
-export const ProjectItem = ({id, name, description}:projectType )=> {
+interface IProjectItem extends IProject {
+    removeProject: (id: number) => void
+}
+
+export const ProjectItem = ({ id, name, description, removeProject }: IProjectItem) => {
     const navigate = useNavigate();
 
     function editProject(event: React.MouseEvent) {
@@ -14,7 +19,10 @@ export const ProjectItem = ({id, name, description}:projectType )=> {
 
     return (
         <Box id={id} title={name} body={description}>
-            <Button handleClick={editProject}>Edit project</Button>
+            <div className='post_btns'>
+                <Button onClick={editProject}>Edit project</Button>
+                <Button onClick={() => removeProject(id)}>Remove project</Button>
+            </div>
         </Box>
     )
 }

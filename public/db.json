@@ -1,0 +1,31 @@
+{
+"projects": [
+    {
+        "id": 1,
+        "name": "First project name",
+        "description": "Here is a description of the first project."
+    },
+    {
+        "id": 2,
+        "name": "Second project name",
+        "description": "Here is a description of the second project."
+    },
+    {
+        "id": 3,
+        "name": "Third Project name",
+        "description": "Here is a description of the third project."
+    },
+    {
+        "id": 4,
+        "name": "Fourth Project name",
+        "description": "Here is a description of the fourth project."
+    }],
+"tasks": [{
+        "id": 1,
+        "body": "some task",
+        "projectId": 1
+    }],
+"workers": {
+        "name": "typicode"
+    }
+}

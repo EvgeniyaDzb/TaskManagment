@@ -3,12 +3,12 @@ import './Button.css'
 
 type ButtonProps = {
     children: string,
-    handleClick:(event: React.MouseEvent) => void
+    onClick:(event: React.MouseEvent) => void
 };
 
-export const Button = ({children, handleClick}:ButtonProps) => {
+export const Button = ({children, onClick}:ButtonProps) => {
     return(
-        <button onClick={handleClick} className='myBtn'>
+        <button onClick={onClick} className='myBtn'>
             {children}
         </button>
     );

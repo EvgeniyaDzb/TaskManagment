@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from "react";
+import Service from "../../API/Service";
+import { useFetching } from "../../hooks/useFetching";
 import { ProjectForm } from "./ProjectForm";
 import { ProjectItem } from "./ProjectItem";
-import { projectType } from "./projectType";
+import { IProject } from "./projectType";
 
 const Projects: React.FC = () => {
+    const [projects, setProjects] = useState<IProject[]>([]);
 
-    const projectsList = [
-        {id: 1, name: "First project name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi similique, velit deserunt animi eveniet odit hic tenetur quibusdam, et ipsa voluptatem ducimus! Nesciunt obcaecati, similique laboriosam beatae iure suscipit doloremque."},
-        {id: 2, name: "Second project name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi similique, velit deserunt animi eveniet odit hic tenetur quibusdam, et ipsa voluptatem ducimus! Nesciunt obcaecati, similique laboriosam beatae iure suscipit doloremque."},
-        {id: 3, name: "Third Project name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi similique, velit deserunt animi eveniet odit hic tenetur quibusdam, et ipsa voluptatem ducimus! Nesciunt obcaecati, similique laboriosam beatae iure suscipit doloremque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi similique, velit deserunt animi eveniet odit hic tenetur quibusdam, et ipsa voluptatem ducimus! Nesciunt obcaecati, similique laboriosam beatae iure suscipit doloremque."},
-    ]
-
-    const [projects, setProjects] = useState<projectType[]>([]);
-
-    const createNewProject = (newProject:projectType) => {
-        setProjects([...projects, newProject])
-        console.log("Add project", projects)
+    const createNewProject = (newProject:IProject) => {
+        setProjects([...projects, newProject]);
     }
+    
+    const removeProject = (id:number):void => {
+        setProjects(projects.filter(project => project.id !==id))
+    }
+    async function getData() {
+        const response = await Service.getAllProject();
+        setProjects([...projects, ...response]);
+    }
+
     useEffect(()=>{
-        setProjects([...projects, ...projectsList])
-        console.log(projects)
+        // getData()
+        Service.getAllProject().then((response) => {
+            setProjects([...projects, ...response]);
+        });
+        
     },[])
 
     return(
-        <div className="boxContainer">
-            {/* <ProjectForm create={createNewProject}/> */}
+        <div>
+        {/* <div className="boxContainer"> */}
+            <ProjectForm create={createNewProject}/>
 
             {projects.map((item)=>{
-             return <div key={item.id}>
-                 <ProjectItem id={item.id} name={item.name} description={item.description}/>
-             </div>
+             return  <ProjectItem key={item.id} id={item.id} name={item.name} description={item.description} removeProject={removeProject}/>     
             })}
         </div>
     )

@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Service from "../../API/Service";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
-import { IProject, projectInitialState } from "./projectType";
+import { projectInitialState, IProject } from "./projectType";
 
-interface IProjectForm {
-    create: (newProject:IProject) => void
+interface IProjectIdPage extends IProject {
+    update?: (newProject:IProject) => void
 } 
 
-export const ProjectForm = ({create}:IProjectForm) => {
+export const ProjectIdPage = ({update}:IProjectIdPage) => {
+    const params = useParams();
     const [project, setProject] = useState<IProject>(projectInitialState)
 
-
-    const addNewProject = (e: React.MouseEvent) => {
+    const updateProject = (e: React.MouseEvent) => {
         e.preventDefault()
-        const newProject = {
-            ...project, id: Date.now()
-        }
-        create(newProject)
-        setProject(projectInitialState)
-    };
+        console.log("vfvfvjz")
+
+    }
+    useEffect(() => {
+        Service.getProjectById(Number(params.id)).then((response) => {
+            setProject(response);
+        });
+    }, [])
+
 
     return (
         <form>
@@ -34,7 +39,7 @@ export const ProjectForm = ({create}:IProjectForm) => {
                 type='text'
                 placeholder='Project description'
             />
-            <Button onClick={addNewProject}>Add project</Button>
+            <Button onClick={updateProject}>Update project</Button>
         </form>
     )
 }
