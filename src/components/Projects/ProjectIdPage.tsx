@@ -15,6 +15,8 @@ export const ProjectIdPage = ({create}:IProjectIdPage) => {
 
     const updateProject = (e: React.MouseEvent) => {
         e.preventDefault()
+        console.log(project)
+        Service.postProject(project)
         console.log("vfvfvjz")
 
     }

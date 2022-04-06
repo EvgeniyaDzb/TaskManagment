@@ -19,7 +19,7 @@ export const ProjectItem = ({ id, name, description, removeProject }: IProjectIt
 
     return (
         <Box id={id} title={name} body={description}>
-            <div className='post_btns'>
+            <div className='projectItem_btns'>
                 <Button onClick={editProject}>Edit project</Button>
                 <Button onClick={() => removeProject(id)}>Remove project</Button>
             </div>

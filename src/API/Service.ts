@@ -1,51 +1,53 @@
 import { IProject } from './../components/Projects/projectType';
 
+const myHeaders = new Headers({
+    "Content-Type": "application/json",
+    Accept: "application/json"
+});
+
+
 export default class Service {
     static async getAllProject():Promise<IProject[]> {
-        return await fetch('./db.json', 
+        return await fetch('/api/projects', 
             {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
+                headers: myHeaders,
             })
             .then((response) => response.json())
             .then((data) =>
-                data.projects as Promise<IProject[]>
+                data as Promise<IProject[]>
             );
     }
 
     static async getProjectById(id:number):Promise<IProject> {
-        return await fetch('../db.json', 
+        return await fetch(`/api/projects/${id}`, 
             {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
+                headers: myHeaders
             })
             .then((response) => response.json())
             .then((data) =>
-                data.projects.find((project:IProject) => project.id === id) as Promise<IProject>
+                data as Promise<IProject>
             );
     }
 
     static async postProject(project:IProject):Promise<void> {
-         await fetch('./db.json', 
+         await fetch('/api/projects', 
             {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    project
-                })
+                headers: myHeaders,
+                body: JSON.stringify(project)
             })
-            // .then((response) => response.json())
-            // .then((data) =>
-            //     data.projects.find((project:IProject) => project.id === id) as Promise<IProject>
-            // );
     }
+
+    static async delProject(id:number):Promise<void> {
+         await fetch('../db.json/projects/'+id, 
+            {
+                method: 'DELETE',
+                headers: myHeaders,
+            })
+            .then(() => console.log("delete"))
+    }
+
+
 }
