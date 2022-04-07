@@ -1,4 +1,6 @@
-import { IProject, projectInitialState } from './../components/Projects/projectType';
+import { ITask } from './../components/Types/tasks';
+import { IWorker } from './../components/Types/workers';
+import { IProject, projectInitialState } from '../components/Types/project';
 import { createServer, Model } from "miragejs";
 import JSON_DATA from "./db.json";
 
@@ -8,14 +10,13 @@ export function makeServer({ environment = "test" }) {
 
         models: {
             projects: Model.extend<IProject[]>([]),
-            // project: Model.extend<Partial<IProject>>({}),
-            // task: Model.extend<Partial<any>>(),
-            // worker: Model.extend<Partial<any>>(),
+            tasks: Model.extend<Partial<ITask[]>>([]),
+            workers: Model.extend<Partial<IWorker[]>>([]),
         },
 
         seeds(server) {
-             server.db.loadData(JSON_DATA);
-            
+            server.db.loadData(JSON_DATA);
+
 
         },
 
@@ -23,7 +24,7 @@ export function makeServer({ environment = "test" }) {
             this.namespace = "/api";
 
             this.get("/projects", (schema, request) => {
-                return schema.db.projects; //.all();
+                return schema.db.projects;
             });
 
             this.post("/projects", (schema, request) => {
@@ -48,6 +49,17 @@ export function makeServer({ environment = "test" }) {
                 let id = request.params.id;
                 schema.db.projects.remove(id);
                 return schema.db.projects;
+
+            })
+
+            this.get("/workers", (schema, request) => {
+                return schema.db.workers;
+            });
+
+            this.delete('/workers/:id', (schema, request) => {
+                let id = request.params.id;
+                schema.db.workers.remove(id);
+                return schema.db.workers;
 
             })
         },

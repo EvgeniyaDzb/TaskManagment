@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Service from "../../API/Service";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
-import { projectInitialState, IProject } from "./projectType";
+import { projectInitialState, IProject } from "../Types/project";
 
 interface IProjectIdPage extends IProject {
     create?: (newProject:IProject) => void
