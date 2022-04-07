@@ -2,13 +2,6 @@
   text-align: center;
 }
 
-
-
 main {
   padding: 50px;
 }
-
-.boxContainer{
-  display: flex;
-  flex-wrap: wrap;
-} 

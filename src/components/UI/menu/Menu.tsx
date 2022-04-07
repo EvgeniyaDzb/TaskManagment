@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { Link } from "react-router-dom";
 import "./Menu.css"
 
 type MenuProps = {
@@ -18,7 +19,7 @@ export const Menu = ({ header, items, active, setActive }: MenuProps) => {
                 <ul>
                     {items.map(item =>
                         <li key={item.path}>
-                            <a href={item.path}>{item.value}</a>
+                            <Link to={item.path}>{item.value}</Link>
                         </li>
                     )}
                 </ul>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Menu } from './components/UI/menu/Menu';
 import { menuRoutes } from './components/UI/menu/menuItems';
@@ -12,15 +11,11 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <React.StrictMode>
-        <BrowserRouter>
-          <Navbar header="Task management" menuActive={menuActive} setMenuActive={setMenuActive} />
-          <Menu header="Main menu" items={menuRoutes} active={menuActive} setActive={setMenuActive} />
-          <main>
-            <AppRouter />
-          </main>
-        </BrowserRouter>
-      </React.StrictMode>
+      <Navbar header="Task management" menuActive={menuActive} setMenuActive={setMenuActive} />
+      <Menu header="Main menu" items={menuRoutes} active={menuActive} setActive={setMenuActive} />
+      <main>
+        <AppRouter />
+      </main>
     </div>
   );
 }

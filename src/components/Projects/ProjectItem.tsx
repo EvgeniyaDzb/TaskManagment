@@ -16,6 +16,7 @@ export const ProjectItem = ({ id, name, description, removeProject }: IProjectIt
         event.preventDefault();
         navigate(`/project/${id}`);
     }
+    
 
     return (
         <Box id={id} title={name} body={description}>

@@ -9,7 +9,8 @@ const Projects: React.FC = () => {
     const [projects, setProjects] = useState<IProject[]>([]);
 
     const removeProject = (id:number):void => {
-        setProjects(projects.filter(project => project.id !==id))
+        setProjects(projects.filter(project => project.id !==id));
+        Service.deleteProject(id);
     }
 
     useEffect(()=>{

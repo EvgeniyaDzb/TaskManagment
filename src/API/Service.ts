@@ -40,14 +40,23 @@ export default class Service {
             })
     }
 
-    static async delProject(id:number):Promise<void> {
-         await fetch('../db.json/projects/'+id, 
+    static async deleteProject(id:number):Promise<void> {
+         await fetch(`/api/projects/${id}`,  
             {
                 method: 'DELETE',
                 headers: myHeaders,
             })
-            .then(() => console.log("delete"))
+            // .then(() => console.log("delete"))
     }
+
+    static async updateProject(project:IProject):Promise<void> {
+        await fetch(`/api/projects/${project.id}`, 
+           {
+               method: "PATCH",
+               headers: myHeaders,
+               body: JSON.stringify(project)
+           })
+   }
 
 
 }
