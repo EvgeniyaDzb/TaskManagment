@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Service from "../../API/Service";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
 import { projectInitialState, IProject } from "../Types/project";
+import ProjectsClient from "../../API/Client/ProjectsClient";
 
-interface IProjectIdPage extends IProject {
-    create?: (newProject:IProject) => void
-} 
 
-export const ProjectIdPage = ({create}:IProjectIdPage) => {
+export const ProjectIdPage: React.FC = () => {
     const params = useParams();
     const [project, setProject] = useState<IProject>(projectInitialState)
 
@@ -19,7 +16,7 @@ export const ProjectIdPage = ({create}:IProjectIdPage) => {
         const updateProject = {
             ...project
         }
-        Service.updateProject(updateProject)
+        ProjectsClient.updateProject(updateProject)
 
     }
 
@@ -28,13 +25,13 @@ export const ProjectIdPage = ({create}:IProjectIdPage) => {
         const newProject = {
             ...project, id: Date.now()
         }
-        Service.postProject(newProject)
+        ProjectsClient.postProject(newProject)
         setProject(projectInitialState)
     };
 
     useEffect(() => {
         if(params.id){
-            Service.getProjectById(Number(params.id)).then((response) => {
+            ProjectsClient.getProjectById(Number(params.id)).then((response) => {
                 setProject(response);
             });
         }

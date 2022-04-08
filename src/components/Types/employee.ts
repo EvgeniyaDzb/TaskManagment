@@ -1,4 +1,4 @@
-export interface IWorker {
+export interface IEmployee {
     id: number;
     taskId: number;
     surname: string;
@@ -7,7 +7,7 @@ export interface IWorker {
     position: string;
 };
 
-export const workerInitialState: IWorker = {
+export const employeeInitialState: IEmployee = {
     id : 0,
     taskId : 0,
     surname: '',

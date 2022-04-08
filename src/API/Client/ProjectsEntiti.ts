@@ -1,5 +1,5 @@
-import { IWorker } from './../components/Types/workers';
-import { IProject } from '../components/Types/project';
+import { IProject } from "../../components/Types/project";
+
 
 const myHeaders = new Headers({
     "Content-Type": "application/json",
@@ -7,7 +7,7 @@ const myHeaders = new Headers({
 });
 
 
-export default class Service {
+export default class ProjectsEntiti {
     static async getAllProject(): Promise<IProject[]> {
         return await fetch('/api/projects',
             {
@@ -58,27 +58,4 @@ export default class Service {
                 body: JSON.stringify(project)
             })
     }
-
-    static async getAllWorkers(): Promise<IWorker[]> {
-        return await fetch('/api/workers',
-            {
-                method: "GET",
-                headers: myHeaders,
-            })
-            .then((response) => response.json())
-            .then((data) =>
-                data as Promise<IWorker[]>
-            );
-    }
-
-    static async deleteWorker(id:number):Promise<void> {
-        await fetch(`/api/workers/${id}`,  
-           {
-               method: 'DELETE',
-               headers: myHeaders,
-           })
-           // .then(() => console.log("delete"))
-   }
-
-
 }

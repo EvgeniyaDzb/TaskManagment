@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Service from "../../API/Service";
 import { Button } from "../UI/button/Button";
 import { ProjectItem } from "./ProjectItem";
 import { IProject } from "../Types/project";
+import ProjectsClient from "../../API/Client/ProjectsClient";
 
 const Projects: React.FC = () => {
     const [projects, setProjects] = useState<IProject[]>([]);
 
     const removeProject = (id:number):void => {
         setProjects(projects.filter(project => project.id !==id));
-        Service.deleteProject(id);
+        ProjectsClient.deleteProject(id);
     }
 
     useEffect(()=>{
-        Service.getAllProject().then((response) => {
+        ProjectsClient.getAllProject().then((response) => {
             setProjects([...projects, ...response]);
         });
         

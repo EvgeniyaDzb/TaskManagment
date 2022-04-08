@@ -1,5 +1,5 @@
 import { ITask } from './../components/Types/tasks';
-import { IWorker } from './../components/Types/workers';
+import { IEmployee } from '../components/Types/employee';
 import { IProject, projectInitialState } from '../components/Types/project';
 import { createServer, Model } from "miragejs";
 import JSON_DATA from "./db.json";
@@ -11,7 +11,7 @@ export function makeServer({ environment = "test" }) {
         models: {
             projects: Model.extend<IProject[]>([]),
             tasks: Model.extend<Partial<ITask[]>>([]),
-            workers: Model.extend<Partial<IWorker[]>>([]),
+            employees: Model.extend<Partial<IEmployee[]>>([]),
         },
 
         seeds(server) {
@@ -52,14 +52,14 @@ export function makeServer({ environment = "test" }) {
 
             })
 
-            this.get("/workers", (schema, request) => {
-                return schema.db.workers;
+            this.get("/employees", (schema, request) => {
+                return schema.db.employees;
             });
 
-            this.delete('/workers/:id', (schema, request) => {
+            this.delete('/employees/:id', (schema, request) => {
                 let id = request.params.id;
-                schema.db.workers.remove(id);
-                return schema.db.workers;
+                schema.db.employees.remove(id);
+                return schema.db.employees;
 
             })
         },

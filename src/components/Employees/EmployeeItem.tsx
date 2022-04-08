@@ -2,17 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "../UI/box/Box";
 import { Button } from "../UI/button/Button";
-import { IWorker } from "../Types/workers";
+import { IEmployee } from "../Types/employee";
 
-interface IWorkerItem {
-    worker: IWorker
-    removeWorker: (id: number) => void
+interface IEmployeeItem {
+    employee: IEmployee
+    removeEmployee: (id: number) => void
 }
 
-export const WorkerItem = ({ worker, removeWorker }: IWorkerItem) => {
+export const EmployeeItem = ({ employee: worker, removeEmployee }: IEmployeeItem) => {
     const navigate = useNavigate();
 
-    function editWorker(event: React.MouseEvent) {
+    function editEmployee(event: React.MouseEvent) {
         event.preventDefault();
         console.log("editWorker")
         // navigate(`/workers/${worker.id}`);
@@ -22,8 +22,8 @@ export const WorkerItem = ({ worker, removeWorker }: IWorkerItem) => {
     return (
         <Box id={worker.id} title={worker.surname + worker.name + worker.patronymic} body={worker.position}>
             <div>
-                <Button onClick={editWorker}>Edit</Button>
-                <Button onClick={() => removeWorker(worker.id)}>Remove</Button>
+                <Button onClick={editEmployee}>Edit</Button>
+                <Button onClick={() => removeEmployee(worker.id)}>Remove</Button>
             </div>
         </Box>
     )
