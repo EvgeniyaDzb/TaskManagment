@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
 import { projectInitialState, IProject } from "../Types/project";
-import ProjectsClient from "../../API/Client/ProjectsClient";
+import ProjectsEntity from "../../API/Client/ProjectsEntity";
 
 
 export const ProjectIdPage: React.FC = () => {
@@ -12,12 +12,10 @@ export const ProjectIdPage: React.FC = () => {
 
     const updateProject = (e: React.MouseEvent) => {
         e.preventDefault()
-        console.log(project)
         const updateProject = {
             ...project
         }
-        ProjectsClient.updateProject(updateProject)
-
+        ProjectsEntity.updateProject(updateProject)
     }
 
     const addNewProject = (e: React.MouseEvent) => {
@@ -25,13 +23,13 @@ export const ProjectIdPage: React.FC = () => {
         const newProject = {
             ...project, id: Date.now()
         }
-        ProjectsClient.postProject(newProject)
+        ProjectsEntity.postProject(newProject)
         setProject(projectInitialState)
     };
 
     useEffect(() => {
         if(params.id){
-            ProjectsClient.getProjectById(Number(params.id)).then((response) => {
+            ProjectsEntity.getProjectById(Number(params.id)).then((response) => {
                 setProject(response);
             });
         }

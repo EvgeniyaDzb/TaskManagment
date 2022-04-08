@@ -3,24 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { ProjectItem } from "./ProjectItem";
 import { IProject } from "../Types/project";
-import ProjectsClient from "../../API/Client/ProjectsClient";
+import ProjectsEntity from "../../API/Client/ProjectsEntity";
 
 const Projects: React.FC = () => {
     const [projects, setProjects] = useState<IProject[]>([]);
-
-    const removeProject = (id:number):void => {
-        setProjects(projects.filter(project => project.id !==id));
-        ProjectsClient.deleteProject(id);
-    }
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        ProjectsClient.getAllProject().then((response) => {
+        ProjectsEntity.getAllProject().then((response) => {
             setProjects([...projects, ...response]);
         });
         
     },[])
 
-    const navigate = useNavigate();
+    const removeProject = (id:number):void => {
+        setProjects(projects.filter(project => project.id !==id));
+        ProjectsEntity.deleteProject(id);
+    }
+
     function addProject(event: React.MouseEvent) {
         event.preventDefault();
         navigate(`/project/new`);

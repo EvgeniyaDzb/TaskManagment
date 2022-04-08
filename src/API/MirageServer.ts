@@ -56,12 +56,29 @@ export function makeServer({ environment = "test" }) {
                 return schema.db.employees;
             });
 
+            this.get("/employee/:id", (schema, request) => {
+                let id = request.params.id
+                return schema.db.employees.find(id)
+            });
+
             this.delete('/employees/:id', (schema, request) => {
                 let id = request.params.id;
                 schema.db.employees.remove(id);
                 return schema.db.employees;
-
             })
+
+            this.patch('/employees/:id', (schema, request) => {
+                let newAttrs = JSON.parse(request.requestBody);
+                let id = request.params.id;
+                schema.db.employees.update(id, newAttrs);
+                return schema.db.employees;
+            })
+
+            this.post("/employees", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody);
+                schema.db.employees.insert(attrs);
+                return schema.db.employees;
+            });
         },
     });
 }

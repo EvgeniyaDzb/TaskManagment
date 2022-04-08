@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
-import EmployeeClient from "../../API/Client/EmployeeClient";
-import { IEmployee } from "../Types/employee";
+import { useNavigate } from "react-router-dom";
+import EmployeeEntity from "../../API/Client/EmployeeEntity";
+import { employeeInitialState, IEmployee } from "../Types/employee";
+import { Button } from "../UI/button/Button";
 import { EmployeeItem } from "./EmployeeItem";
 
 const Employees: React.FC = () => {
-    const [employees, setEmployees] = useState<IEmployee[]>([])
+    const [employees, setEmployees] = useState<IEmployee[]>([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        EmployeeClient.getAllEmployees().then(responce => {
+        EmployeeEntity.getAllEmployees().then(responce => {
             setEmployees([...employees, ...responce])
         })
     },[])
 
     const removeEmployee = (id:number):void => {
         setEmployees(employees.filter(worker => worker.id !==id));
-        EmployeeClient.deleteEmployee(id);
+        EmployeeEntity.deleteEmployee(id);
+    }
+
+    const addEmployee = (e: React.MouseEvent) => {
+        e.preventDefault();
+        navigate(`/employee/new`);
     }
 
     return(
         <div>
+            <Button onClick={addEmployee}>Add Employee</Button>
             {employees.map((item) => {
               return  <EmployeeItem key={item.id} employee={item} removeEmployee={removeEmployee} />
             })}

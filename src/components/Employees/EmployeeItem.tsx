@@ -9,21 +9,20 @@ interface IEmployeeItem {
     removeEmployee: (id: number) => void
 }
 
-export const EmployeeItem = ({ employee: worker, removeEmployee }: IEmployeeItem) => {
+export const EmployeeItem = ({ employee, removeEmployee }: IEmployeeItem) => {
     const navigate = useNavigate();
 
     function editEmployee(event: React.MouseEvent) {
         event.preventDefault();
-        console.log("editWorker")
-        // navigate(`/workers/${worker.id}`);
+        navigate(`/employee/${employee.id}`);
     }
     
 
     return (
-        <Box id={worker.id} title={worker.surname + worker.name + worker.patronymic} body={worker.position}>
+        <Box id={employee.id} title={employee.surname + employee.name + employee.patronymic} body={employee.position}>
             <div>
                 <Button onClick={editEmployee}>Edit</Button>
-                <Button onClick={() => removeEmployee(worker.id)}>Remove</Button>
+                <Button onClick={() => removeEmployee(employee.id)}>Remove</Button>
             </div>
         </Box>
     )
