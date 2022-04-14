@@ -1,17 +1,18 @@
-export interface IEmployee {
+import { Task } from './tasks';
+export interface Employee {
     id: number;
-    taskId: number;
     surname: string;
     name: string;
     patronymic: string;
     position: string;
+    tasks?: Task[]
 };
 
-export const employeeInitialState: IEmployee = {
+export const employeeInitialState: Employee = {
     id : 0,
-    taskId : 0,
     surname: '',
     name: '',
     patronymic: '',
     position: '',
+    tasks: []
 }

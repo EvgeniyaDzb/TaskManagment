@@ -1,4 +1,4 @@
-import { IProject } from "../../components/Types/project";
+import { Project } from "../../components/Types/project";
 
 
 const myHeaders = new Headers({
@@ -7,8 +7,8 @@ const myHeaders = new Headers({
 });
 
 
-export default class ProjectsEntiti {
-    static async getAllProject(): Promise<IProject[]> {
+export default class ProjectsService {
+    static async getAllProject(): Promise<Project[]> {
         return await fetch('/api/projects',
             {
                 method: "GET",
@@ -16,11 +16,11 @@ export default class ProjectsEntiti {
             })
             .then((response) => response.json())
             .then((data) =>
-                data as Promise<IProject[]>
+                data as Promise<Project[]>
             );
     }
 
-    static async getProjectById(id: number): Promise<IProject> {
+    static async getProjectById(id: number): Promise<Project> {
         return await fetch(`/api/projects/${id}`,
             {
                 method: "GET",
@@ -28,11 +28,11 @@ export default class ProjectsEntiti {
             })
             .then((response) => response.json())
             .then((data) =>
-                data as Promise<IProject>
+                data as Promise<Project>
             );
     }
 
-    static async postProject(project: IProject): Promise<void> {
+    static async postProject(project: Project): Promise<void> {
         await fetch('/api/projects',
             {
                 method: "POST",
@@ -50,7 +50,7 @@ export default class ProjectsEntiti {
         // .then(() => console.log("delete"))
     }
 
-    static async updateProject(project: IProject): Promise<void> {
+    static async updateProject(project: Project): Promise<void> {
         await fetch(`/api/projects/${project.id}`,
             {
                 method: "PATCH",

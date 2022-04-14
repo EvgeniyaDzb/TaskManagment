@@ -1,12 +1,12 @@
-import { IEmployee } from "../../components/Types/employee";
+import { Employee } from "../../components/Types/employee";
 
 const myHeaders = new Headers({
     "Content-Type": "application/json",
     Accept: "application/json"
 });
 
-export default class EmployeeEntity {
-    static async getAllEmployees(): Promise<IEmployee[]> {
+export default class EmployeeService {
+    static async getAllEmployees(): Promise<Employee[]> {
         return await fetch('/api/employees',
             {
                 method: "GET",
@@ -14,11 +14,11 @@ export default class EmployeeEntity {
             })
             .then((response) => response.json())
             .then((data) =>
-                data as Promise<IEmployee[]>
+                data as Promise<Employee[]>
             );
     }
 
-    static async getEmployeeById(id: number): Promise<IEmployee> {
+    static async getEmployeeById(id: number): Promise<Employee> {
         return await fetch(`/api/employee/${id}`,
             {
                 method: "GET",
@@ -26,7 +26,7 @@ export default class EmployeeEntity {
             })
             .then((response) => response.json())
             .then((data) =>
-                data as Promise<IEmployee>
+                data as Promise<Employee>
             );
     }
 
@@ -39,7 +39,7 @@ export default class EmployeeEntity {
         // .then(() => console.log("delete"))
     }
 
-    static async postEmployee(employee: IEmployee): Promise<void> {
+    static async postEmployee(employee: Employee): Promise<void> {
         await fetch('/api/employees',
             {
                 method: "POST",
@@ -47,7 +47,7 @@ export default class EmployeeEntity {
                 body: JSON.stringify(employee)
             })
     }
-    static async updateEmployee(employee: IEmployee): Promise<void> {
+    static async updateEmployee(employee: Employee): Promise<void> {
         await fetch(`/api/employees/${employee.id}`,
             {
                 method: "PATCH",

@@ -1,7 +1,7 @@
-import { ITask } from './../components/Types/tasks';
-import { IEmployee } from '../components/Types/employee';
-import { IProject, projectInitialState } from '../components/Types/project';
-import { createServer, Model } from "miragejs";
+import { Task } from './../components/Types/tasks';
+import { Employee } from '../components/Types/employee';
+import { Project } from '../components/Types/project';
+import { belongsTo, createServer, hasMany, Model } from "miragejs";
 import JSON_DATA from "./db.json";
 
 export function makeServer({ environment = "test" }) {
@@ -9,15 +9,25 @@ export function makeServer({ environment = "test" }) {
         environment,
 
         models: {
-            projects: Model.extend<IProject[]>([]),
-            tasks: Model.extend<Partial<ITask[]>>([]),
-            employees: Model.extend<Partial<IEmployee[]>>([]),
+            projects: Model.extend<Project[]>([]),
+            tasks: Model.extend<Partial<Task[]>>([]),
+            employees: Model.extend<Partial<Employee[]>>([]),
+
+            // employee: Model.extend<IEmployee>({
+            //     task: hasMany()
+            // }),
+            // project: Model.extend<IProject>({
+            //     task: hasMany()
+            // }),
+            // task: Model.extend<ITask>({
+            //     project: belongsTo(),
+            //     employee: belongsTo()
+            // }),
+          
         },
 
         seeds(server) {
             server.db.loadData(JSON_DATA);
-
-
         },
 
         routes() {
@@ -34,8 +44,13 @@ export function makeServer({ environment = "test" }) {
             });
 
             this.get("/projects/:id", (schema, request) => {
-                let id = request.params.id
-                return schema.db.projects.find(id)
+                let id = request.params.id;
+                let project = schema.db.projects.find(id);
+                project.tasks = schema.db.tasks.where({ projectId: id });
+                // project.tasks.map(task =>{
+                //     task.employee = schema.db.employees.findBy({ id: task.employeeId})
+                //  })
+                return project;
             })
 
             this.patch('/projects/:id', (schema, request) => {
@@ -49,7 +64,6 @@ export function makeServer({ environment = "test" }) {
                 let id = request.params.id;
                 schema.db.projects.remove(id);
                 return schema.db.projects;
-
             })
 
             this.get("/employees", (schema, request) => {
@@ -79,6 +93,27 @@ export function makeServer({ environment = "test" }) {
                 schema.db.employees.insert(attrs);
                 return schema.db.employees;
             });
+
+            this.get("/tasks", (schema, request) => {
+                let tasks = schema.db.tasks;
+                tasks.map(task=>{
+                   task.employee = schema.db.employees.findBy({ id: task.employeeId})
+                   task.project = schema.db.projects.findBy({id: task.projectId})
+                })
+                return tasks;
+            });
+
+            this.delete('/task/:id', (schema, request) => {
+                let id = request.params.id;
+                schema.db.tasks.remove(id);
+                return schema.db.tasks;
+            })
+
+            this.get("/task/:id", (schema, request) => {
+                let id = request.params.id;
+                let task = schema.db.tasks.find(id);
+                return task;
+            })
         },
     });
 }

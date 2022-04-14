@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import EmployeeEntity from "../../API/Client/EmployeeEntity"
-import { IEmployee, employeeInitialState } from "../Types/employee"
+import EmployeeService from "../../API/Client/EmployeeService"
+import { Employee, employeeInitialState } from "../Types/employee"
 import { Button } from "../UI/button/Button"
 import { Input } from "../UI/input/Input"
 
@@ -9,12 +9,12 @@ import { Input } from "../UI/input/Input"
 
 export const EmployeeIdPage: React.FC = () => {
     const params = useParams();
-    const [employee, setEmployee] = useState<IEmployee>(employeeInitialState)
+    const [employee, setEmployee] = useState<Employee>(employeeInitialState)
 
 
     useEffect(() => {
         if (params.id) {
-            EmployeeEntity.getEmployeeById(Number(params.id)).then((response) => {
+            EmployeeService.getEmployeeById(Number(params.id)).then((response) => {
                 setEmployee(response);
             });
         }
@@ -25,7 +25,7 @@ export const EmployeeIdPage: React.FC = () => {
         const updateEmployee= {
             ...employee
         }
-        EmployeeEntity.updateEmployee(updateEmployee)
+        EmployeeService.updateEmployee(updateEmployee)
     }
 
     const addNewEmployee = (e: React.MouseEvent) => {
@@ -33,7 +33,7 @@ export const EmployeeIdPage: React.FC = () => {
         const newEmployee = {
             ...employee, id: Date.now()
         }
-        EmployeeEntity.postEmployee(newEmployee)
+        EmployeeService.postEmployee(newEmployee)
         setEmployee(employeeInitialState)
     };
 

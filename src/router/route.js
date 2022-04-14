@@ -3,6 +3,7 @@ import Projects from "../components/Projects/Projects";
 import Tasks from "../components/Tasks/Tasks";
 import Employees from "../components/Employees/Employees";
 import { EmployeeIdPage } from "../components/Employees/EmployeeIdPage";
+import { TaskIdPage } from "../components/Tasks/TaskIdPage";
 
 
 export const routes = [
@@ -14,4 +15,6 @@ export const routes = [
     {path: '/employee/new', element: <EmployeeIdPage/>},
     {path: '/project/:id', element: <ProjectIdPage/>},
     {path: '/project/new', element: <ProjectIdPage/>},
+    {path: '/task/new', element: <TaskIdPage/>},
+    {path: '/task/:id', element: <TaskIdPage/>},
 ]

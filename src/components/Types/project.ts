@@ -1,11 +1,14 @@
-export interface IProject {
+import { Task } from './tasks';
+export interface Project {
     id: number;
-    name: string;
+    title: string;
     description: string;
+    tasks?: Task[];
 };
 
-export const projectInitialState: IProject = {
+export const projectInitialState: Project = {
     id : 0,
-    name: '',
-    description: ''
+    title: '',
+    description: '',
+    tasks: []
 }

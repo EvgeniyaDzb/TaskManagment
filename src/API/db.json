@@ -2,36 +2,70 @@
     "projects": [
         {
             "id": 1,
-            "name": "First project name",
+            "title": "First project name",
             "description": "Here is a description of the first project."
         },
         {
             "id": 2,
-            "name": "Second project name",
+            "title": "Second project name",
             "description": "Here is a description of the second project."
         },
         {
             "id": 3,
-            "name": "Third Project name",
+            "title": "Third Project name",
             "description": "Here is a description of the third project."
         },
         {
             "id": 4,
-            "name": "Fourth Project name",
+            "title": "Fourth Project name",
             "description": "Here is a description of the fourth project."
         }
     ],
     "tasks": [
         {
             "id": 1,
-            "body": "some task",
-            "projectId": 1
+            "projectId": 1,
+            "employeeId": 1,
+            "status": "Not Started",
+            "title": "First Task",
+            "description": "Here is a description of the first project.",
+            "beginDate": "2022-04-11",
+            "endDate": "2022-04-18"
+        },
+        {
+            "id": 2,
+            "projectId": 1,
+            "employeeId": 2,
+            "status": "In Progress",
+            "title": "Second task",
+            "description": "Here is a description of the second project.",
+            "beginDate": "2022-04-9",
+            "endDate": "2022-04-18"
+        }, 
+        {
+            "id": 3,
+            "projectId": 3,
+            "employeeId": 3,
+            "status": "Not Started",
+            "title": "Third Task",
+            "description": "Here is a description of the third project.",
+            "beginDate": "2022-04-11",
+            "endDate": "2022-04-18"
+        }, 
+        {
+            "id": 4,
+            "projectId": 4,
+            "employeeId": 3,
+            "status": "Not Started",
+            "title": "Third Task",
+            "description": "Here is a description of the third project.",
+            "beginDate": "2022-04-11",
+            "endDate": "2022-04-18"
         }
     ],
     "employees": [
         {
             "id": 1,
-            "taskId": 1,
             "surname": "Dzembas",
             "name": "Evgeniya",
             "patronymic": "Mikhailovna",
@@ -39,7 +73,6 @@
         },
         {
             "id": 2,
-            "taskId": 2,
             "surname": "Ivanov",
             "name": "Ivan",
             "patronymic": "Ivanovich",
@@ -47,7 +80,6 @@
         },
         {
             "id": 3,
-            "taskId": 2,
             "surname": "Space",
             "name": "Earth",
             "patronymic": "Star",
