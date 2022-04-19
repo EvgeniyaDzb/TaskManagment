@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "../UI/box/Box";
 import { Button } from "../UI/button/Button";
-import { Employee } from "../Types/employee";
+import { Employee } from "../../Types/employee";
 
 interface EmployeeItem {
     employee: Employee

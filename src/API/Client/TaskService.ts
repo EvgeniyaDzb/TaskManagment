@@ -1,4 +1,4 @@
-import { Task } from '../../components/Types/tasks';
+import { Task } from '../../Types/tasks';
 
 const myHeaders = new Headers({
     "Content-Type": "application/json",
@@ -27,6 +27,18 @@ export default class TaskService {
         .then((response) => response.json())
         .then((data) =>
             data as Promise<Task>
+        );
+    }
+
+    static async getTasksByProjectId(projectId:number): Promise<Task[]> {
+        return await fetch(`/api/task/${projectId}`,
+        {
+            method: "GET",
+            headers: myHeaders,
+        })
+        .then((response) => response.json())
+        .then((data) =>
+            data as Promise<Task[]>
         );
     }
 

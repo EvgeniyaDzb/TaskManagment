@@ -1,4 +1,4 @@
-import { Project } from "../../components/Types/project";
+import { Project } from "../../Types/project";
 
 
 const myHeaders = new Headers({

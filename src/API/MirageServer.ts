@@ -1,6 +1,6 @@
-import { Task } from './../components/Types/tasks';
-import { Employee } from '../components/Types/employee';
-import { Project } from '../components/Types/project';
+import { Task } from '../Types/tasks';
+import { Employee } from '../Types/employee';
+import { Project } from '../Types/project';
 import { belongsTo, createServer, hasMany, Model } from "miragejs";
 import JSON_DATA from "./db.json";
 
@@ -11,19 +11,7 @@ export function makeServer({ environment = "test" }) {
         models: {
             projects: Model.extend<Project[]>([]),
             tasks: Model.extend<Partial<Task[]>>([]),
-            employees: Model.extend<Partial<Employee[]>>([]),
-
-            // employee: Model.extend<IEmployee>({
-            //     task: hasMany()
-            // }),
-            // project: Model.extend<IProject>({
-            //     task: hasMany()
-            // }),
-            // task: Model.extend<ITask>({
-            //     project: belongsTo(),
-            //     employee: belongsTo()
-            // }),
-          
+            employees: Model.extend<Partial<Employee[]>>([]),          
         },
 
         seeds(server) {
@@ -96,10 +84,6 @@ export function makeServer({ environment = "test" }) {
 
             this.get("/tasks", (schema, request) => {
                 let tasks = schema.db.tasks;
-                tasks.map(task=>{
-                   task.employee = schema.db.employees.findBy({ id: task.employeeId})
-                   task.project = schema.db.projects.findBy({id: task.projectId})
-                })
                 return tasks;
             });
 
@@ -114,6 +98,12 @@ export function makeServer({ environment = "test" }) {
                 let task = schema.db.tasks.find(id);
                 return task;
             })
+
+            // this.get("/task/:projectId", (schema, request) => {
+            //     let id = request.params.projectId;
+            //     let tasks = schema.db.tasks.where({ projectId: id });
+            //     return tasks;
+            // })
         },
     });
 }

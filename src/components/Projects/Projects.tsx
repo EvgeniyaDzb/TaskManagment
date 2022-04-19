@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { ProjectItem } from "./ProjectItem";
-import { Project } from "../Types/project";
+import { Project } from "../../Types/project";
 import ProjectsService from "../../API/Client/ProjectsService";
 
 const Projects: React.FC = () => {
@@ -30,7 +30,6 @@ const Projects: React.FC = () => {
         {/* <div className="boxContainer"> */}
             
             <Button onClick={addProject}>Add new project</Button>
-
             {projects.map((item)=>{
              return  <ProjectItem key={item.id} id={item.id} title={item.title} description={item.description} removeProject={removeProject}/>     
             })}

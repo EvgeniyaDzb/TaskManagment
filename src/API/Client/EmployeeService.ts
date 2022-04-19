@@ -1,4 +1,4 @@
-import { Employee } from "../../components/Types/employee";
+import { Employee } from "../../Types/employee";
 
 const myHeaders = new Headers({
     "Content-Type": "application/json",

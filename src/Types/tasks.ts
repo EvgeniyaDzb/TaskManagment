@@ -1,7 +1,3 @@
-import { Project, projectInitialState } from './project';
-import { Employee, employeeInitialState } from './employee';
-
-
 export enum TaskStatus {
     NotStarted = "Not Started",
     Progress = "In Progress",
@@ -11,26 +7,22 @@ export enum TaskStatus {
 
 export interface Task {
     id: number;
-    projectId?: number;
-    project?: Project;
-    employeeId?: number;
-    employee?: Employee;
+    projectId: number;
+    employeeId: number;
     status: TaskStatus;
     title: string;
     description: string;
-    beginDate: Date;
-    endDate: Date;
+    beginDate: string;
+    endDate: string;
 };
 
 export const taskInitialState: Task = {
     id : 0,
     projectId: 0,
-    project: projectInitialState,
     employeeId: 0,
-    employee: employeeInitialState,
     status: TaskStatus.NotStarted,
     title: '',
     description: '',
-    beginDate: new Date(),
-    endDate: new Date(),
+    beginDate: '',
+    endDate: '',
 }

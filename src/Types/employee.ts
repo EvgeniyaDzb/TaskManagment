@@ -1,11 +1,9 @@
-import { Task } from './tasks';
 export interface Employee {
     id: number;
     surname: string;
     name: string;
     patronymic: string;
-    position: string;
-    tasks?: Task[]
+    position: string
 };
 
 export const employeeInitialState: Employee = {
@@ -13,6 +11,5 @@ export const employeeInitialState: Employee = {
     surname: '',
     name: '',
     patronymic: '',
-    position: '',
-    tasks: []
+    position: ''
 }
