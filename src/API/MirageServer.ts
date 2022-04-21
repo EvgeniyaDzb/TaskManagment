@@ -34,7 +34,7 @@ export function makeServer({ environment = "test" }) {
             this.get("/projects/:id", (schema, request) => {
                 let id = request.params.id;
                 let project = schema.db.projects.find(id);
-                project.tasks = schema.db.tasks.where({ projectId: id });
+                // project.tasks = schema.db.tasks.where({ projectId: id });
                 // project.tasks.map(task =>{
                 //     task.employee = schema.db.employees.findBy({ id: task.employeeId})
                 //  })
@@ -99,11 +99,19 @@ export function makeServer({ environment = "test" }) {
                 return task;
             })
 
-            // this.get("/task/:projectId", (schema, request) => {
-            //     let id = request.params.projectId;
-            //     let tasks = schema.db.tasks.where({ projectId: id });
-            //     return tasks;
-            // })
+            this.patch('/task/:id', (schema, request) => {
+                let newAttrs = JSON.parse(request.requestBody);
+                let id = request.params.id;
+                schema.db.tasks.update(id, newAttrs);
+                return schema.db.tasks;
+            })
+
+            
+            this.post("/task", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody);
+                schema.db.tasks.insert(attrs);
+                return schema.db.tasks;
+            });
         },
     });
 }

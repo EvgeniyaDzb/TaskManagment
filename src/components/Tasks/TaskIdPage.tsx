@@ -21,15 +21,15 @@ export const TaskIdPage: React.FC = () => {
         const updateTask = {
             ...task
         }
-        // ProjectsService.updateProject(updateProject)
+        TaskService.updateTask(updateTask);
     }
 
     const addNewTask = (e: React.MouseEvent) => {
         e.preventDefault()
-        const newProject = {
+        const newTask = {
             ...task, id: Date.now()
         }
-        // ProjectsService.postProject(newProject)
+        TaskService.postTask(newTask);
         setTask(taskInitialState)
     };
 

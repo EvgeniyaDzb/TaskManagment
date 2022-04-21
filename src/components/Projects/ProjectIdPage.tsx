@@ -34,13 +34,18 @@ export const ProjectIdPage: React.FC = () => {
         setProject(projectInitialState)
     };
 
+    const removeTask = (id:number):void => {
+        setTasks(tasks.filter(task => task.id !==id));
+        TaskService.deleteTask(id);
+    }
+
     useEffect(() => {
         if (params.id) {
             ProjectsService.getProjectById(Number(params.id)).then((response) => {
                 setProject(response);
             });
             TaskService.getAllTasks().then((response) => {
-                let taskByProjectId = response.filter(task => task.projectId === project.id);
+                let taskByProjectId = response.filter(task => task.projectId === Number(params.id));
                 setTasks(taskByProjectId)
             });
             EmployeeService.getAllEmployees().then((response) => {
@@ -71,7 +76,7 @@ export const ProjectIdPage: React.FC = () => {
             </form>
             {tasks.map(task => {
                 const employee = employees.find((employee) => Number(employee.id) === task.employeeId);
-                return <TaskItem key={task.id} task={task} project={project} employee={employee}/>
+                return <TaskItem key={task.id} task={task} project={project} employee={employee} removeTask={removeTask}/>
             })}
         </div>
     )

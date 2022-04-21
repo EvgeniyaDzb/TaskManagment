@@ -34,6 +34,11 @@ const Tasks: React.FC = () => {
         navigate(`/task/new`);
     }
 
+    const removeTask = (id:number):void => {
+        setTasks(tasks.filter(task => task.id !==id));
+        TaskService.deleteTask(id);
+    }
+
     return (
         <div>
             <Button onClick={addTask}>Add new task</Button>
@@ -41,7 +46,7 @@ const Tasks: React.FC = () => {
                 const project = projects.find((project) => Number(project.id) === task.projectId);
                 const employee = employees.find((employee) => Number(employee.id) === task.employeeId);
 
-                return <TaskItem key={task.id} task={task} project={project} employee={employee}/>
+                return <TaskItem key={task.id} task={task} project={project} employee={employee} removeTask={removeTask}/>
             })}
         </div>
     )

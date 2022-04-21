@@ -10,18 +10,16 @@ import { Button } from "../UI/button/Button";
 interface TaskItemProps{
     task: Task,
     project?: Project,
-    employee?: Employee
+    employee?: Employee,
+    removeTask: (id: number) => void
 }
 
-const TaskItem = ({ task, project, employee}: TaskItemProps) => {
+const TaskItem = ({ task, project, employee, removeTask}: TaskItemProps) => {
     const navigate = useNavigate();
 
     function editTask(event: React.MouseEvent) {
         event.preventDefault();
         navigate(`/task/${task.id}`);
-    }
-    const removeTask = (id: number): void => {
-        TaskService.deleteTask(id);
     }
 
     return (<Box id={task.id}>
