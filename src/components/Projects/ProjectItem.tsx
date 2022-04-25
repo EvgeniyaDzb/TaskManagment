@@ -12,8 +12,7 @@ interface ProjectItem extends Project {
 export const ProjectItem = ({ id, title, description, removeProject }: ProjectItem) => {
     const navigate = useNavigate();
 
-    function editProject(event: React.MouseEvent) {
-        event.preventDefault();
+    function editProject() {
         navigate(`/project/${id}`);
     }
     

@@ -20,8 +20,7 @@ const Employees: React.FC = () => {
         EmployeeService.deleteEmployee(id);
     }
 
-    const addEmployee = (e: React.MouseEvent) => {
-        e.preventDefault();
+    const addEmployee = () => {
         navigate(`/employee/new`);
     }
 

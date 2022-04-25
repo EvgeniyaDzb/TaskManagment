@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
 import { projectInitialState, Project } from "../../Types/project";
@@ -13,25 +13,26 @@ import TaskItem from "../Tasks/TaskItem";
 
 export const ProjectIdPage: React.FC = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [project, setProject] = useState<Project>(projectInitialState);
-    const [tasks, setTasks] = useState<Task[]>([])
-    const [employees, setEmployees] = useState<Employee[]>([])
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [employees, setEmployees] = useState<Employee[]>([]);
+    const navigateToProgects = () => navigate("/progects");
 
-    const updateProject = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const updateProject = () => {
         const updateProject = {
             ...project
         }
-        ProjectsService.updateProject(updateProject)
+        ProjectsService.updateProject(updateProject);
+        navigateToProgects();
     }
 
-    const addNewProject = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const addNewProject = () => {
         const newProject = {
             ...project, id: Date.now()
         }
-        ProjectsService.postProject(newProject)
-        setProject(projectInitialState)
+        ProjectsService.postProject(newProject);
+        navigateToProgects();
     };
 
     const removeTask = (id:number):void => {
@@ -46,7 +47,7 @@ export const ProjectIdPage: React.FC = () => {
             });
             TaskService.getAllTasks().then((response) => {
                 let taskByProjectId = response.filter(task => task.projectId === Number(params.id));
-                setTasks(taskByProjectId)
+                setTasks(taskByProjectId);
             });
             EmployeeService.getAllEmployees().then((response) => {
                 setEmployees(response);
@@ -60,18 +61,19 @@ export const ProjectIdPage: React.FC = () => {
             <form>
                 <Input
                     value={project.title}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({ ...project, title: e.target.value })}
+                    onChange={(value) => setProject({ ...project, title: value })}
                     type='text'
                     placeholder='Project Name'
                 />
                 <Input
                     value={project.description}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({ ...project, description: e.target.value })}
+                    onChange={(value) => setProject({ ...project, description: value })}
                     type='text'
                     placeholder='Project description'
                 />
                 {params.id ? <Button onClick={updateProject}>Update project</Button> :
                     <Button onClick={addNewProject}>Add project</Button>}
+                    <Button onClick={navigateToProgects}>Сancel</Button>
 
             </form>
             {tasks.map(task => {

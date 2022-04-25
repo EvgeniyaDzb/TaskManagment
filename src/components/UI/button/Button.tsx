@@ -3,13 +3,19 @@ import './Button.css'
 
 type ButtonProps = {
     children: string,
-    onClick:(event: React.MouseEvent) => void
+    onClick:() => void
 };
 
 export const Button = ({children, onClick}:ButtonProps) => {
+
+    const handleClick = (event: React.MouseEvent) => {
+        event.preventDefault();
+        onClick()
+    }
+    
     return(
-        <button onClick={onClick} className='myBtn'>
+        <div onClick={handleClick} className='myBtn'>
             {children}
-        </button>
+        </div>
     );
 };

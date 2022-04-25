@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EmployeeService from "../../API/Client/EmployeeService";
 import ProjectsService from "../../API/Client/ProjectsService";
 import TaskService from "../../API/Client/TaskService";
@@ -12,25 +12,26 @@ import { Select } from "../UI/select/Select";
 
 export const TaskIdPage: React.FC = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [task, setTask] = useState<Task>(taskInitialState);
     const [projects, setProjects] = useState<Project[]>([]);
-    const [employees, setEmployees] = useState<Employee[]>([])
+    const [employees, setEmployees] = useState<Employee[]>([]);
+    const navigateToPreviousPage = () => navigate(-1);
 
-    const updateTask = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const updateTask = () => {
         const updateTask = {
             ...task
         }
         TaskService.updateTask(updateTask);
+        navigateToPreviousPage()
     }
 
-    const addNewTask = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const addNewTask = () => {
         const newTask = {
             ...task, id: Date.now()
         }
         TaskService.postTask(newTask);
-        setTask(taskInitialState)
+        navigateToPreviousPage();
     };
 
     useEffect(() => {
@@ -50,7 +51,7 @@ export const TaskIdPage: React.FC = () => {
             <form>
                 <Input
                     value={task.title}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask({ ...task, title: e.target.value })}
+                    onChange={(value) => setTask({ ...task, title: value })}
                     type='text'
                     placeholder='Task title'
                 />
@@ -63,17 +64,17 @@ export const TaskIdPage: React.FC = () => {
                 />
                 <Input
                     value={task.description}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask({ ...task, description: e.target.value })}
+                    onChange={(value) => setTask({ ...task, description: value })}
                     type='text'
                     placeholder='Task description'
                 />
                 <Input type="date"
                     value={task.beginDate}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask({ ...task, beginDate: e.target.value })} 
+                    onChange={(value) => setTask({ ...task, beginDate: value })} 
                 />
                 <Input type="date"
                     value={task.endDate}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask({ ...task, endDate: e.target.value })} 
+                    onChange={(value) => setTask({ ...task, endDate: value })} 
                 />
 
                 <Select value={task.status}
@@ -92,8 +93,12 @@ export const TaskIdPage: React.FC = () => {
                     })}
                 />
 
-                {params.id ? <Button onClick={updateTask}>Update task</Button> :
-                    <Button onClick={addNewTask}>Add task</Button>}
+                {params.id 
+                    ? <Button onClick={updateTask}>Update task</Button> 
+                    : <Button onClick={addNewTask}>Add task</Button>
+                }
+
+                <Button onClick={navigateToPreviousPage}>Cancel</Button>
 
             </form>
         </div>

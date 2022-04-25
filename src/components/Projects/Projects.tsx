@@ -21,8 +21,7 @@ const Projects: React.FC = () => {
         ProjectsService.deleteProject(id);
     }
 
-    function addProject(event: React.MouseEvent) {
-        event.preventDefault();
+    function addProject() {
         navigate(`/project/new`);
     }
     return(

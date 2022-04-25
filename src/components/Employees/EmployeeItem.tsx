@@ -12,18 +12,21 @@ interface EmployeeItem {
 export const EmployeeItem = ({ employee, removeEmployee }: EmployeeItem) => {
     const navigate = useNavigate();
 
-    function editEmployee(event: React.MouseEvent) {
-        event.preventDefault();
+    function editEmployee() {
         navigate(`/employee/${employee.id}`);
     }
-    
+
 
     return (
-        <Box id={employee.id} title={employee.surname + employee.name + employee.patronymic} body={employee.position}>
+        <Box id={employee.id}>
             <div>
-                <Button onClick={editEmployee}>Edit</Button>
-                <Button onClick={() => removeEmployee(employee.id)}>Remove</Button>
+                <p><strong>Surname </strong>{employee.surname}</p>
+                <p><strong>Name </strong>{employee.name}</p>
+                <p><strong>Patronymic </strong>{employee.patronymic}</p>
             </div>
+            <p><strong>Position </strong>{employee.position}</p>
+            <Button onClick={editEmployee}>Edit</Button>
+            <Button onClick={() => removeEmployee(employee.id)}>Remove</Button>
         </Box>
     )
 }

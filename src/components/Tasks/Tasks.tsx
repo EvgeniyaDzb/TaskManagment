@@ -29,8 +29,7 @@ const Tasks: React.FC = () => {
          })
     }, [])
 
-    const addTask = (event: React.MouseEvent) => {
-        event.preventDefault();
+    const addTask = () => {
         navigate(`/task/new`);
     }
 

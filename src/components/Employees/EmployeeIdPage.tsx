@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import EmployeeService from "../../API/Client/EmployeeService"
 import { Employee, employeeInitialState } from "../../Types/employee"
 import { Button } from "../UI/button/Button"
@@ -9,6 +9,7 @@ import { Input } from "../UI/input/Input"
 
 export const EmployeeIdPage: React.FC = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [employee, setEmployee] = useState<Employee>(employeeInitialState)
 
 
@@ -20,21 +21,22 @@ export const EmployeeIdPage: React.FC = () => {
         }
     }, [])
 
-    const updateEmployee = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const navigateToEmployeesPage = () => navigate("/employees");
+
+    const updateEmployee = () => {
         const updateEmployee= {
             ...employee
         }
         EmployeeService.updateEmployee(updateEmployee)
+        navigateToEmployeesPage()
     }
 
-    const addNewEmployee = (e: React.MouseEvent) => {
-        e.preventDefault()
+    const addNewEmployee = () => {
         const newEmployee = {
             ...employee, id: Date.now()
         }
         EmployeeService.postEmployee(newEmployee)
-        setEmployee(employeeInitialState)
+        navigateToEmployeesPage()
     };
 
 
@@ -43,29 +45,30 @@ export const EmployeeIdPage: React.FC = () => {
             value={employee.surname}
             type='text'
             placeholder='Employee Surname'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmployee({ ...employee, surname: e.target.value })}
+            onChange={(value) => setEmployee({ ...employee, surname: value })}
         />
         <Input
             value={employee.name}
             type='text'
             placeholder='Employee Name'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmployee({ ...employee, name: e.target.value })}
+            onChange={(value) => setEmployee({ ...employee, name: value })}
         />
         <Input
             value={employee.patronymic}
             type='text'
             placeholder='Employee Patronumic'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmployee({ ...employee, patronymic: e.target.value })}
+            onChange={(value) => setEmployee({ ...employee, patronymic: value })}
         />
         <Input
             value={employee.position}
             type='text'
             placeholder='Employee Position'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmployee({ ...employee, position: e.target.value })}
+            onChange={(value) => setEmployee({ ...employee, position: value })}
         />
 
         {params.id ? <Button onClick={updateEmployee}>Update employee</Button> :
             <Button onClick={addNewEmployee}>Add employee</Button>}
+            <Button onClick={navigateToEmployeesPage}>Сancel</Button>
 
     </form>
     )

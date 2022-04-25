@@ -17,8 +17,7 @@ interface TaskItemProps{
 const TaskItem = ({ task, project, employee, removeTask}: TaskItemProps) => {
     const navigate = useNavigate();
 
-    function editTask(event: React.MouseEvent) {
-        event.preventDefault();
+    function editTask() {
         navigate(`/task/${task.id}`);
     }
 

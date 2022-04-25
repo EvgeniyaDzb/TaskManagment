@@ -5,11 +5,16 @@ type InputProps = {
     value: string,
     type?: string,
     placeholder?: string,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (value: string) => void
 };
 
-export const Input = (props:InputProps) => {
+export const Input = ({value, type, placeholder, onChange}:InputProps) => {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {       
+        onChange(e.target.value)
+    }
+
     return(
-        <input className='myInput' {...props}/>
+        <input className='myInput' value={value} type={type} placeholder={placeholder} onChange={handleChange}/>
     );
 };
