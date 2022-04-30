@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmployeeService from "../../API/Client/EmployeeService";
+import EmployeeService from "../../API/Service/EmployeeService";
 import { employeeInitialState, Employee } from "../../Types/employee";
 import { Button } from "../UI/button/Button";
 import { EmployeeItem } from "./EmployeeItem";

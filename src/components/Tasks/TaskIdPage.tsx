@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import EmployeeService from "../../API/Client/EmployeeService";
-import ProjectsService from "../../API/Client/ProjectsService";
-import TaskService from "../../API/Client/TaskService";
+import EmployeeService from "../../API/Service/EmployeeService";
+import ProjectsService from "../../API/Service/ProjectsService";
+import TaskService from "../../API/Service/TaskService";
 import { Employee } from "../../Types/employee";
 import { Project } from "../../Types/project";
 import { Task, taskInitialState, TaskStatus } from "../../Types/tasks";

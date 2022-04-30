@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { ProjectItem } from "./ProjectItem";
 import { Project } from "../../Types/project";
-import ProjectsService from "../../API/Client/ProjectsService";
+import ProjectsService from "../../API/Service/ProjectsService";
 
 const Projects: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);

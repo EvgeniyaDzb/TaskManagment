@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import EmployeeService from "../../API/Client/EmployeeService"
+import EmployeeService from "../../API/Service/EmployeeService"
 import { Employee, employeeInitialState } from "../../Types/employee"
 import { Button } from "../UI/button/Button"
 import { Input } from "../UI/input/Input"

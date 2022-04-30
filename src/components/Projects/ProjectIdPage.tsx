@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../UI/button/Button";
 import { Input } from "../UI/input/Input";
 import { projectInitialState, Project } from "../../Types/project";
-import ProjectsService from "../../API/Client/ProjectsService";
+import ProjectsService from "../../API/Service/ProjectsService";
 import { Task } from "../../Types/tasks";
-import TaskService from "../../API/Client/TaskService";
+import TaskService from "../../API/Service/TaskService";
 import { Employee } from "../../Types/employee";
-import EmployeeService from "../../API/Client/EmployeeService";
+import EmployeeService from "../../API/Service/EmployeeService";
 import TaskItem from "../Tasks/TaskItem";
 
 
@@ -78,7 +78,7 @@ export const ProjectIdPage: React.FC = () => {
             </form>
             {tasks.map(task => {
                 const employee = employees.find((employee) => Number(employee.id) === task.employeeId);
-                return <TaskItem key={task.id} task={task} project={project} employee={employee} removeTask={removeTask}/>
+                return <TaskItem key={task.id} task={task} project={project} showProject={false} employee={employee} removeTask={removeTask}/>
             })}
         </div>
     )
