@@ -18,7 +18,7 @@ export const Menu = ({ header, items, active, setActive }: MenuProps) => {
                 <div className="menu__header">{header}</div>
                 <ul>
                     {items.map(item =>
-                        <li key={item.path}>
+                        <li key={item.path} onClick={()=>setActive(false)}>
                             <Link to={item.path}>{item.value}</Link>
                         </li>
                     )}
